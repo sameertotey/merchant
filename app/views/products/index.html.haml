@@ -1,4 +1,4 @@
-%h1 Listing products
+%h1 All Products
 
 %table
   %tr
@@ -22,4 +22,5 @@
 
 %br
 
-= link_to 'New Product', new_product_path
+%p
+  = link_to 'Create a New Product', new_product_path, id: "new_product"

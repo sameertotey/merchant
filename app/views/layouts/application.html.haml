@@ -1,9 +1,22 @@
 !!!
 %html
   %head
-    %title Merchant
+    %title
+      FoodWorks - Products: #{controller.action_name}
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   %body
-    = yield
+  .wrapper
+    .header
+      %h1 FoodWorks
+      %p Your Online Grocery
+    %p{style: "color: green"}= flash[:notice]
+    .sidebar
+      (sidebar)
+    .main
+      = yield
+    .footer
+      FoodWorks Online Grocery
+      %br/
+      A Rails Jumpstart Project
