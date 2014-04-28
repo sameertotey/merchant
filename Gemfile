@@ -36,5 +36,31 @@ gem 'spring',        group: :development
 # gem 'capistrano-rails', group: :development
 
 # Use debugger
-# gem 'debugger', group: [:development, :test]
+gem 'debugger', group: [:development, :test]
+
+gem 'haml'
+
+group :development, :test do 
+  gem "rb-fsevent"
+  gem "guard"
+  gem "guard-rspec"
+  gem "rspec-rails"
+  gem "shoulda-matchers"
+  gem "capybara"
+  gem "launchy"
+  gem "factory_girl_rails"
+  gem 'database_cleaner'
+  gem 'haml-rails'
+end
+
+gem 'unicorn'
+
+gem 'pg'
+
+gem "rails_12factor", group: :production
+ruby '2.1.1'
+
+gem 'omniauth'
+gem 'figaro'
+gem 'omniauth-twitter'
 
