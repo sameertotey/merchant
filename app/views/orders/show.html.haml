@@ -1,0 +1,13 @@
+%p
+  %b User:
+  = @order.user_id
+%p
+  %b Status:
+  = @order.status
+%p
+  %b Item Count: 
+  = @order.order_items.count
+
+= link_to 'Edit', edit_order_path(@order)
+\|
+= link_to 'Back', orders_path

@@ -16,4 +16,11 @@ describe ProductsHelper do
       expect(print_price(2.0)).to eq("$2.00")
     end
   end
+
+  describe "#print_stock" do
+    it "properly creates stock content" do
+      expect(print_stock(0)).to eq('<span class="out_stock">Out of Stock</span>')
+      expect(print_stock(5)).to eq('<span class="in_stock">In Stock (5)</span>')
+    end
+  end
 end

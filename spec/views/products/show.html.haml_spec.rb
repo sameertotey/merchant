@@ -16,6 +16,6 @@ describe "products/show" do
     rendered.should match(/Title/)
     rendered.should match(/9.99/)
     rendered.should match(/MyText/)
-    rendered.should match(/Image Url/)
+    rendered.should match(/Image url/)
   end
 end
