@@ -11,5 +11,9 @@ require 'spec_helper'
 #   end
 # end
 describe ProductsHelper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe "#print_price" do
+    it "properly formats the product prices" do
+      expect(print_price(2.0)).to eq("$2.00")
+    end
+  end
 end

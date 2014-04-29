@@ -2,21 +2,23 @@
 
 %table
   %tr
+    %th Image
     %th Title
     %th Price
-    %th Description
-    %th Image url
+    %th links
     %th
     %th
     %th
 
   - @products.each do |product|
     %tr
-      %td= product.title
-      %td= product.price
-      %td= product.description
-      %td= product.image_url
-      %td= link_to 'Show', product
+      %td= image_tag "products/#{product.image_url}"
+      %td
+        %span.product_title
+          = product.title
+        = product.description
+      %td= print_price(product.price)
+      %td= link_to 'Show', product_path(product)
       %td= link_to 'Edit', edit_product_path(product)
       %td= link_to 'Destroy', product, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
