@@ -28,7 +28,7 @@ describe OrderItem do
     expect(order_item.order).to be_instance_of(Order)
   end
   
-  it { should validate_numericality_of(:quantity).only_integer.is_greater_than_or_equal_to(0) }
+  it { should validate_numericality_of(:quantity).only_integer.is_greater_than(0) }
 
   it 'calculates the subtotal' do
     order_item1 = FactoryGirl::build(:order_item)

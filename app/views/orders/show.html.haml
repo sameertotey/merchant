@@ -13,6 +13,7 @@
     %th Items
     %th Title
     %th Quantity
+    %th Stock
     %th Unit Price
     %th Subtotal
     %th
@@ -20,7 +21,8 @@
     %tr
       %td= image_tag "products/#{item.product.image_url}"
       %td= item.product.title 
-      %td= item.quantity
+      %td= link_to item.quantity, edit_order_item_path(item)
+      %td= print_stock(item.product.stock, item.quantity)
       %td= item.product.price
       %td= print_price item.subtotal
       %td= link_to 'Remove', item, :method => :delete, :data => { :confirm => 'Are you sure?' }

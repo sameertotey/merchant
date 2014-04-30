@@ -23,7 +23,7 @@ describe OrderItemsController do
   # This should return the minimal set of attributes required to create a valid
   # OrderItem. As you add validations to OrderItem, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) { { product_id: "1", order_id: "1" } }
+  let(:valid_attributes) { { product_id: "1", order_id: "1", quantity: 1 } }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
@@ -47,50 +47,6 @@ describe OrderItemsController do
       end
     end
 
-  end
-
-  describe "PUT update" do
-    describe "with valid params" do
-      it "updates the requested order_item" do
-        order_item = OrderItem.create! valid_attributes
-        # Assuming there are no other order_items in the database, this
-        # specifies that the OrderItem created on the previous line
-        # receives the :update_attributes message with whatever params are
-        # submitted in the request.
-        OrderItem.any_instance.should_receive(:update).with({ "product_id" => "1" })
-        put :update, {:id => order_item.to_param, :order_item => { "product_id" => "1" }}, valid_session
-      end
-
-      it "assigns the requested order_item as @order_item" do
-        order_item = OrderItem.create! valid_attributes
-        put :update, {:id => order_item.to_param, :order_item => valid_attributes}, valid_session
-        assigns(:order_item).should eq(order_item)
-      end
-
-      it "redirects to the order_item" do
-        order_item = OrderItem.create! valid_attributes
-        put :update, {:id => order_item.to_param, :order_item => valid_attributes}, valid_session
-        response.should redirect_to(order_item)
-      end
-    end
-
-    describe "with invalid params" do
-      it "assigns the order_item as @order_item" do
-        order_item = OrderItem.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        OrderItem.any_instance.stub(:save).and_return(false)
-        put :update, {:id => order_item.to_param, :order_item => { "product_id" => "invalid value" }}, valid_session
-        assigns(:order_item).should eq(order_item)
-      end
-
-      it "re-renders the 'edit' template" do
-        order_item = OrderItem.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        OrderItem.any_instance.stub(:save).and_return(false)
-        put :update, {:id => order_item.to_param, :order_item => { "product_id" => "invalid value" }}, valid_session
-        response.should render_template("edit")
-      end
-    end
   end
 
   describe "DELETE destroy" do

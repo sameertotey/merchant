@@ -1,3 +1,4 @@
+= @order_item.product.title
 = form_for @order_item do |f|
   - if @order_item.errors.any?
     #error_explanation
@@ -6,12 +7,6 @@
         - @order_item.errors.full_messages.each do |msg|
           %li= msg
 
-  .field
-    = f.label :product_id
-    = f.number_field :product_id
-  .field
-    = f.label :order_id
-    = f.number_field :order_id
   .field
     = f.label :quantity
     = f.number_field :quantity

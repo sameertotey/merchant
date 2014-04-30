@@ -1,5 +1,5 @@
 class OrderItemsController < ApplicationController
-  before_action :set_order_item, only: [:show, :edit, :update, :destroy]
+  before_action :set_order_item, only: [:show, :edit, :destroy]
   before_action :load_order, only: [:create]
 
   # GET /order_items/1/edit
@@ -9,7 +9,8 @@ class OrderItemsController < ApplicationController
   # POST /order_items
   # POST /order_items.json
   def create
-    @order_item = @order.order_items.new(product_id: params[:product_id], quantity: 1)
+    @order_item = @order.order_items.find_or_initialize_by(product_id: params[:product_id])
+    @order_item.quantity += 1
 
     respond_to do |format|
       if @order_item.save
@@ -25,11 +26,20 @@ class OrderItemsController < ApplicationController
   # PATCH/PUT /order_items/1
   # PATCH/PUT /order_items/1.json
   def update
-    respond_to do |format|
-      if @order_item.update(order_item_params)
-        format.html { redirect_to @order_item, notice: 'Order item was successfully updated.' }
+    @order_item = OrderItem.find_by(id: params[:id])
+    if params[:order_item][:quantity].to_i == 0
+      @order_item.destroy
+      respond_to do |format|
+        format.html { redirect_to @order_item.order, notice: 'Order item was successfully removed.'}
+        format.json { head :no_content }
+      end
+    elsif @order_item.update(order_item_params)
+      respond_to do |format|
+        format.html { redirect_to @order_item.order, notice: 'Order item was successfully updated.' }
         format.json { render :show, status: :ok, location: @order_item }
-      else
+      end
+    else
+      respond_to do |format|
         format.html { render :edit }
         format.json { render json: @order_item.errors, status: :unprocessable_entity }
       end
