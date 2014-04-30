@@ -5,7 +5,7 @@ require 'capybara/rspec'
 feature 'the merchant app' do
 
   it 'displays the correct title' do
-    visit(products_path)
+    visit(root_path)
     expect(page).to have_title('FoodWorks - Products:')
   end
   
