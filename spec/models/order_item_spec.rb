@@ -27,5 +27,13 @@ describe OrderItem do
   it 'is a child of order' do
     expect(order_item.order).to be_instance_of(Order)
   end
+  
+  it { should validate_numericality_of(:quantity).only_integer.is_greater_than_or_equal_to(0) }
 
+  it 'calculates the subtotal' do
+    order_item1 = FactoryGirl::build(:order_item)
+    order_item1.product.price = "1.99"
+    order_item1.quantity = 5
+    expect(order_item1.subtotal.to_s).to eq("9.95")   
+  end
 end

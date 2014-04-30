@@ -153,7 +153,7 @@ describe OrdersController do
     it "redirects to the orders list" do
       order = Order.create! valid_attributes
       delete :destroy, {:id => order.to_param}, valid_session
-      response.should redirect_to(orders_url)
+      response.should redirect_to(products_path)
     end
   end
 

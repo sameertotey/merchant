@@ -95,6 +95,7 @@ describe OrderItemsController do
 
   describe "DELETE destroy" do
     it "destroys the requested order_item" do
+      request.env["HTTP_REFERER"] = orders_path
       order_item = OrderItem.create! valid_attributes
       expect {
         delete :destroy, {:id => order_item.to_param}, valid_session
@@ -102,9 +103,10 @@ describe OrderItemsController do
     end
 
     it "redirects to the order_items list" do
+      request.env["HTTP_REFERER"] = orders_path
       order_item = OrderItem.create! valid_attributes
       delete :destroy, {:id => order_item.to_param}, valid_session
-      response.should redirect_to(order_items_url)
+      response.should redirect_to(orders_path)
     end
   end
 
