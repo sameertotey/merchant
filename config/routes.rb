@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root 'products#index'
+  root to: 'products#index'
 
   resources :orders
 
@@ -9,5 +9,8 @@ Rails.application.routes.draw do
   resources :products
 
   match '/auth/:provider/callback', to: 'sessions#create', via: :get
+
+  match "/login" => redirect("/auth/twitter"), as: :login, via: :get
+  match "/logout" => "sessions#destroy", as: :logout, via: :get
 
 end

@@ -57,15 +57,6 @@ class OrderItemsController < ApplicationController
   end
 
   private
-    # load the order to which the new item will be added
-    def load_order
-      @order = Order.find_or_initialize_by(id: session[:order_id])
-      if @order.new_record?
-        @order.status = "unsubmitted"
-        @order.save!
-        session[:order_id] = @order.id
-      end
-    end
 
     # Use callbacks to share common setup or constraints between actions.
     def set_order_item
