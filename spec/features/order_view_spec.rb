@@ -9,7 +9,9 @@ feature 'Order view' do
   let (:product2)    { FactoryGirl::build(:product) }
   let (:order_item1) { FactoryGirl::build(:order_item) }
   let (:order_item2) { FactoryGirl::build(:order_item) }
+
   before(:each) do
+    user =  FactoryGirl::create(:user)
     visit(order_path(order))
   end
 

@@ -6,6 +6,7 @@ describe "orders/show" do
       :user_id => 1,
       :status => "Status"
     ))
+    view.stub(:current_user)
   end
 
   it "renders attributes in <p>" do

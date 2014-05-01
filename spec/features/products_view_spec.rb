@@ -5,6 +5,7 @@ require 'capybara/rspec'
 feature 'the products view' do
 
   before(:each) do
+    user =  FactoryGirl::create(:user)
     visit(products_path)
   end
 

@@ -1,0 +1,34 @@
+%h1 Thank You for Your Order
+%table
+  %tr
+    %th Customer
+    %td= @order.user.name if @order.user
+  %tr
+    %th Status:
+    %td= @order.status
+  %tr
+    %th Items:
+    %td= @order.order_items.count
+  %tr
+    %th Items
+    %th Title
+    %th Quantity
+    %th Stock
+    %th Unit Price
+    %th Subtotal
+  -@order.order_items.each do |item|
+    %tr
+      %td= image_tag "products/#{item.product.image_url}"
+      %td= item.product.title 
+      %td= link_to item.quantity, edit_order_item_path(item)
+      %td= print_stock(item.product.stock, item.quantity)
+      %td= item.product.price
+      %td= print_price item.subtotal
+  %tr
+    %th Order Total
+    %td= print_price (@order.total)
+  %tr
+    %th Shipping To:
+    %td= @order.address
+
+= link_to 'Continue More Shoping', products_path

@@ -106,7 +106,7 @@ describe OrdersController do
         # specifies that the Order created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Order.any_instance.should_receive(:update).with({ "user_id" => "1" })
+        Order.any_instance.should_receive(:update).with({"user_id"=>"1", "status"=>"submitted"})
         put :update, {:id => order.to_param, :order => { "user_id" => "1" }}, valid_session
       end
 
@@ -119,7 +119,7 @@ describe OrdersController do
       it "redirects to the order" do
         order = Order.create! valid_attributes
         put :update, {:id => order.to_param, :order => valid_attributes}, valid_session
-        response.should redirect_to(order)
+        response.should redirect_to(confirm_order_path(order))
       end
     end
 

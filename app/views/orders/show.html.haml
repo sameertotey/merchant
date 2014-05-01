@@ -1,34 +1,43 @@
 %h1 Your Order
-%table
-  %tr
-    %th Customer
-    %td= @order.user.name if @order.user
-  %tr
-    %th Status:
-    %td= @order.status
-  %tr
-    %th Items:
-    %td= @order.order_items.count
-  %tr
-    %th Items
-    %th Title
-    %th Quantity
-    %th Stock
-    %th Unit Price
-    %th Subtotal
-    %th
-  -@order.order_items.each do |item|
+= form_for @order do |f|
+  %table
     %tr
-      %td= image_tag "products/#{item.product.image_url}"
-      %td= item.product.title 
-      %td= link_to item.quantity, edit_order_item_path(item)
-      %td= print_stock(item.product.stock, item.quantity)
-      %td= item.product.price
-      %td= print_price item.subtotal
-      %td= link_to 'Remove', item, :method => :delete, :data => { :confirm => 'Are you sure?' }
-  %tr
-    %th Order Total
-    %td= print_price (@order.total)
+      %th Customer
+      %td= @order.user.name if @order.user
+    %tr
+      %th Status:
+      %td= @order.status
+    %tr
+      %th Items:
+      %td= @order.order_items.count
+    %tr
+      %th Items
+      %th Title
+      %th Quantity
+      %th Stock
+      %th Unit Price
+      %th Subtotal
+      %th
+    -@order.order_items.each do |item|
+      %tr
+        %td= image_tag "products/#{item.product.image_url}"
+        %td= item.product.title 
+        %td= link_to item.quantity, edit_order_item_path(item)
+        %td= print_stock(item.product.stock, item.quantity)
+        %td= item.product.price
+        %td= print_price item.subtotal
+        %td= link_to 'Remove', item, :method => :delete, :data => { :confirm => 'Are you sure?' }
+    %tr
+      %th Order Total
+      %td= print_price (@order.total)
+    %tr
+      %th Shipping To:
+      - if current_user
+        %td= f.select :address_id, current_user.addresses.collect{|a| [a.to_s, a.id]}
+        %td= link_to "Add an Address", new_address_path 
+    %tr
+      %th
+      %td= f.submit "Submit Order"
 
 = link_to 'Empty Cart', @order, method: :delete, data: {confirm: 'Are you sure?'}
 
